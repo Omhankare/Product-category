@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -11,6 +12,17 @@ function Product() {
         setProducts(data.data);
       });
   }, [page]);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:8086/products/${id}`, {
+        method: "DELETE",
+      });
+      setProducts(products.filter((p) => p.product_id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -37,17 +49,23 @@ function Product() {
                     <td>{p.category_id}</td>
                     <td>{p.category_name}</td>
                     <td>
-                      <button className="btn btn-warning btn-sm me-2">
+                      <Link
+                        to={`/edit-product/${p.product_id}`}
+                        className="btn btn-warning btn-sm me-2"
+                      >
                         Edit
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(p.product_id)}
+                        className="btn btn-danger btn-sm"
+                      >
+                        Delete
                       </button>
-                      <button className="btn btn-danger btn-sm">Delete</button>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-
-            {/* 🔥 Simple Pagination */}
             <div className="d-flex justify-content-center gap-3">
               <button
                 className="btn btn-secondary"

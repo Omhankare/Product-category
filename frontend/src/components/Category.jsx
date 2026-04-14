@@ -1,16 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Category() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8086/categories") // ⚠️ double // fix kiya
+    fetch("http://localhost:8086/categories")
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`http://localhost:8086/products/${id}`, {
+        method: "DELETE",
+      });
+      setCategories(categories.filter((p) => p.product_id !== id));
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -35,10 +47,16 @@ function Category() {
                       <td>{cat.id}</td>
                       <td>{cat.name}</td>
                       <td>
-                        <button className="btn btn-warning btn-sm me-2">
+                        <Link
+                          to={`/edit-product/${cat.id}`}
+                          className="btn btn-warning btn-sm me-2"
+                        >
                           Edit
-                        </button>
-                        <button className="btn btn-danger btn-sm">
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(p.product_id)}
+                          className="btn btn-danger btn-sm"
+                        >
                           Delete
                         </button>
                       </td>
