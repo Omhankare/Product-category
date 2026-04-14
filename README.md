@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-in working  
-frontend - react.js + tailwind + bootstrap prebuild templates  
-backend - node.js , express.js  
-database - postgresql  
-=======
 # 🛒 Product & Category Manager
+<img width="2558" height="1301" alt="Screenshot 2026-04-14 165447" src="https://github.com/user-attachments/assets/dc481e7f-b28a-44ed-9c8a-df3992d2f0c1" />
+<img width="2540" height="1241" alt="Screenshot 2026-04-14 165532" src="https://github.com/user-attachments/assets/8b16c76b-d00c-497c-b551-036697c1ee1e" />
+
+<img width="2546" height="1238" alt="Screenshot 2026-04-14 165717" src="https://github.com/user-attachments/assets/6c3aad7a-28cd-48d4-8449-278c9a93230c" />
+<img width="2542" height="1235" alt="Screenshot 2026-04-14 165635" src="https://github.com/user-attachments/assets/5f301d59-417d-44b4-b71f-bb9f7a066ab4" />
+
 
 A full-stack CRUD (Create, Read, Update, Delete) application to manage **Products** and **Categories**.
 Built using **React (Frontend)**, **Node.js + Express (Backend)**, and **PostgreSQL (Database)**.
@@ -160,7 +160,8 @@ npm run dev
 **Om Krishna Hankare**
 
 - B.E. Computer Science (AI/ML)
-- Full Stack Developer (MERN)
+- Full Stack web/software Developer
+- Java , JavaScript
 
 ---
 
@@ -175,4 +176,3 @@ This project is built as a **practice + learning project** to understand full-st
 Make sure PostgreSQL is running and database is properly configured before starting backend.
 
 ---
->>>>>>> af2a59d (form handle and redirection)
