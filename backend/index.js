@@ -1,16 +1,18 @@
 const express = require("express");
 const { Client } = require("pg");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
 const port = 8086;
+app.use(cors());
 
 const con = new Client({
   user: "postgres",
   host: "localhost",
   port: 5432,
   database: "machine",
-  password: "your_password",
+  password: "om123",
 });
 
 con
@@ -97,7 +99,7 @@ app.post("/products", async (req, res) => {
       "INSERT INTO products(name, category_id) VALUES ($1,$2) RETURNING *",
       [name, category_id],
     );
-    res.json(result.rows);
+    res.json(result.rows[0]);
   } catch (err) {
     console.log(err);
     res.status(500).json({
@@ -107,9 +109,29 @@ app.post("/products", async (req, res) => {
 });
 //view product
 app.get("/products", async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+
+  const offset = (page - 1) * limit;
+
   try {
-    const result = await con.query("SELECT * FROM products");
-    res.json(result.rows);
+    const result = await con.query(
+      `SELECT 
+        p.id AS product_id,
+        p.name AS product_name,
+        c.id AS category_id,
+        c.name AS category_name
+       FROM products p
+       LEFT JOIN categories c 
+       ON p.category_id = c.id
+       ORDER BY p.id
+       LIMIT $1 OFFSET $2`,
+      [limit, offset],
+    );
+
+    res.json({
+      data: result.rows,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json({
