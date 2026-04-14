@@ -1,4 +1,4 @@
 in working  
-frontend - react.js + flowbite tailwind prebuild templates  
+frontend - react.js + tailwind + bootstrap prebuild templates  
 backend - node.js , express.js  
 database - postgresql  
