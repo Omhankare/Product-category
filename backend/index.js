@@ -1,6 +1,7 @@
 const express = require("express");
 const { Client } = require("pg");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 app.use(express.json());
@@ -12,7 +13,7 @@ const con = new Client({
   host: "localhost",
   port: 5432,
   database: "machine",
-  password: "om123",
+  password: process.env.DB_PASSWORD,
 });
 
 con
