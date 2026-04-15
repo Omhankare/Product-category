@@ -146,7 +146,7 @@ app.patch("/products/:id", async (req, res) => {
   const { name } = req.body;
   try {
     const result = await con.query(
-      "UPDATE products SET name = $1 WHERE id = $2 RETURNING *",
+      "UPDATE products SET name = $1 WHERE id = $2 RETURNING * ",
       [name, id],
     );
     res.json(result.rows[0]);
