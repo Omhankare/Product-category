@@ -6,7 +6,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "om hankare",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
